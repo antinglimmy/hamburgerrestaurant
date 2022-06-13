@@ -17,3 +17,16 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.Bun {
+  height: 50px;
+  width: 150px;
+}
+.Tomato {
+  height: 50px;
+  width: 150px;
+}
+.Lettuce {
+  height: 50px;
+  width: 150px;
+}
