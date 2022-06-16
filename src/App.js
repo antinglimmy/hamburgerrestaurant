@@ -5,9 +5,7 @@ import bunImage from './images/595-5957396_hamburger-bun-png-hamburger-bun-trans
 import tomatoImage from './images/png-clipart-sliced-tomato-pizza-tomato-vegetarian-cuisine-vegetable-tomato-food-nightshade-family.png';
 import lettuceImage from './images/kisspng-romaine-lettuce-hamburger-salad-clip-art-lettuce-5abb7a7895a819.786040171522236024613.jpg';
 
-// import React, { useState } from "react";
-// import img6 from '../../Assets/First.png'
-// import img7 from '../../Assets/Second.png'
+// let selectedIngredientsTally = {}
 
 // const listOfBurgers = () => {
 //   hamburger:
@@ -23,8 +21,10 @@ class IngredientForm extends React.Component {
       selectedIngredient: "",
       selectedIngredients: [],
       bun: false,
-      hamburger: ["Beef Patty", "Lettuce", "Tomato"],
-      order: "hamburger"
+      // hamburger: ["Beef Patty", "Lettuce", "Tomato"],
+      hamburger: { bun: 1, lettuce: 1, tomato: 1 },
+      order: "hamburger",
+      selectedIngredientsTally: {},
     };
 
     // this.handleChange = this.handleChange.bind(this);
@@ -32,19 +32,78 @@ class IngredientForm extends React.Component {
   }
 
   checkIngredients = () => {
-    let score = 1
-    for (let ingredient of this.state.hamburger) 
-    {
-      if (this.state.selectedIngredients.includes(ingredient)) {
-      score +=1
+    let selectedIngredientsTally = {};
+    // let message = ""
+    for (let i = 0; i < this.state.selectedIngredients.length; i++) {
+      if (this.state.selectedIngredients[i] in selectedIngredientsTally) {
+        selectedIngredientsTally[this.state.selectedIngredients[i]] += 1
+      } else {
+        selectedIngredientsTally[this.state.selectedIngredients[i]] = 1
       }
-    } 
-    if (score === this.state.hamburger.length) {
-      return "You built the correct burger"
-    } else {
-      return "You built the wrong burger, try again!"
     }
-    }
+    console.log(this.state.hamburger.bun)
+    console.log(selectedIngredientsTally)
+
+    // for (let i = 0; i < this.state.hamburger.length; i++){
+    //   if (this.state.hamburger)
+    // }
+
+    //   if (this.state.hamburger.bun === selectedIngredientsTally.Bun){
+    //     message = "You have the right number of buns"
+    //     console.log ("i happen")
+    //   }
+    // return message
+  }
+
+  orderKeys = (obj, expected) => {
+
+  var keys = Object.keys(obj).sort(function keyOrder(k1, k2) {
+      if (k1 < k2) return -1;
+      else if (k1 > k2) return +1;
+      else return 0;
+  });
+
+  var i, after = {};
+  for (i = 0; i < keys.length; i++) {
+    after[keys[i]] = obj[keys[i]];
+    delete obj[keys[i]];
+  }
+
+  for (i = 0; i < keys.length; i++) {
+    obj[keys[i]] = after[keys[i]];
+  }
+  return obj;
+  }
+
+    // let message = ""
+    // for (let ingredient of this.state.hamburger) 
+    // {
+    //   if (!this.state.selectedIngredients.includes(ingredient)) {
+    //    message = "You have a wrong ingredient"
+    //   }
+    //   if (this.state.selectedIngredients.includes(ingredient)) {
+        
+    //   }
+    //   if (score === this.state.hamburger.length) {
+    //   return "You built the correct burger"
+    // } else {
+    //   return "You built the wrong burger, try again!"
+    // }
+    
+  // checkIngredients = () => {
+  //   let score = 1
+  //   for (let ingredient of this.state.hamburger) 
+  //   {
+  //     if (this.state.selectedIngredients.includes(ingredient)) {
+  //     score +=1
+  //     }
+  //   } 
+  //   if (score === this.state.hamburger.length) {
+  //     return "You built the correct burger"
+  //   } else {
+  //     return "You built the wrong burger, try again!"
+  //   }
+  //   }
   
 
   handleClick = (event) => {
@@ -55,42 +114,7 @@ class IngredientForm extends React.Component {
       // event.target.innerText === "Bun" && bun: true,
       }));
     }
- 
-  // Location = () => {
-  // const [imageClicked, setImageClicked] = useState({
-  //   first: false,
-  //   second: false,
-  //   ground: false
-  // });
-    
-  //   onClickHandler = (order) => {
-  //   setImageClicked((prevState) => ({
-  //     ...prevState,
-  //     [order]: !prevState[order]
-  //   }));
-  // };
-    // const imgArr = [
-    //  {
-    //   id: 'bun',
-    //   image: bun
-    //  }, 
-    // ]
 
-    // const [open, setOpen] = useState(null);
-
-    // const [showImage, setShowImage] = useState({
-    //   showImageNow: true,
-    //   showImageId: null,
-    // })
-    // const {showImageNow, showImageId} = showImage;
-
-    // const OpenImage = (a) => {
-    //  setOpen(a.image);
-    //  setShowImage({
-    //    showImageNow: !showImageNow,
-    //    showImageId: a.id
-    //  });
-    // }
 
   render() {
    
@@ -108,9 +132,6 @@ class IngredientForm extends React.Component {
       {this.state.selectedIngredients.includes("Bun") === true && <img src={bunImage} alt="bun" className="Bun" />}
       {this.state.selectedIngredients.includes("Tomato") === true && <img src={tomatoImage} alt="tomato" className="Tomato" />}
       {this.state.selectedIngredients.includes("Lettuce") === true && <img src={lettuceImage} alt="lettuce" className="Lettuce" />}
-{/* <div>
-  {imageClicked.ground && <img src={bun} alt="bun" />}
-</div> */}
 
 
 <table>
@@ -123,79 +144,13 @@ class IngredientForm extends React.Component {
       <td key={index}>{d}</td>
     </tr>))}
   </tbody>
-      </table>
+</table>
       
       {this.checkIngredients()}
-
-{/* {<img src={bun} alt={"Bun"}/>} */}
-
- {/* {imgArr.map((a, i) => 
-           <div key={i}>
-             <button 
-              onClick={() => OpenImage(a)}
-              className="ground" 
-             >
-              {a.id}
-             </button>
-
-             <br />
-        
-             {showImageNow && showImageId === a.id ?
-               <img
-                src={open} 
-                alt={a.id} 
-               />
-             :null}
-           </div>
-         )} */}
+      {/* {this.orderKeys(selectedIngredientsTally)} */}
 
     </div>)};
 
-  }
-
-/* //         <header>
-//           <h3>Burger Restaurant</h3>
-//           <button onClick={this.handleClick}>Bun</button>
-//           <button onClick={this.handleClick}>Tomato</button>
-//           <button onClick={this.handleClick}>Lettuce</button>
-
-//           {/* {this.state.selectedIngredients} */
-//         </header>
-//      <table>
-//          <tbody>
-//     <tr>
-//       <th>Ingredient List</th>
-//     </tr>
-//  {this.state.selectedIngredients.map((d, index) =>  */}
-//       <tr>
-//         <td key={index}>{d}</td>
-//       </tr>
-//       )}
-//       </tbody>
-//       </table>
-
-//  {imgArr.map((a, i) => 
-//            <div key={i}>
-
-//              <button 
-//               onClick={() => OpenImage(a)}
-//               className="ground" 
-//              >
-//               {a.id}
-//              </button>
-
-//              <br />
-        
-//              {showImageNow && showImageId === a.id ?
-//                <img
-//                 src={open} 
-//                 alt={a.id} 
-//                />
-//              :null}
-//            </div>
-//          )}
-  
-    // )};
-  
+  }  
 
 export default IngredientForm;
