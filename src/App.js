@@ -21,90 +21,82 @@ class IngredientForm extends React.Component {
       selectedIngredient: "",
       selectedIngredients: [],
       bun: false,
-      // hamburger: ["Beef Patty", "Lettuce", "Tomato"],
-      hamburger: { bun: 1, lettuce: 1, tomato: 1 },
+      // hamburger: ["Bun", "Lettuce", "Tomato"],
+      hamburger: {"Bun": 1, "Lettuce": 1, "Tomato": 1 },
       order: "hamburger",
       selectedIngredientsTally: {},
+      selectedIngredientsObject: {"Bun": false, "Lettuce": false, "Tomato": false},
     };
 
     // this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.checkIngredients2 = this.checkIngredients2.bind(this);
   }
 
-  checkIngredients = () => {
-    let selectedIngredientsTally = {};
-    // let message = ""
-    for (let i = 0; i < this.state.selectedIngredients.length; i++) {
-      if (this.state.selectedIngredients[i] in selectedIngredientsTally) {
-        selectedIngredientsTally[this.state.selectedIngredients[i]] += 1
-      } else {
-        selectedIngredientsTally[this.state.selectedIngredients[i]] = 1
-      }
+  checkIngredients2 = () => {
+    // let ingredientsToAdd = []
+    // let ingredientsToAdd2 = {"cheese":true}
+    for (let i = 0; i < 3; i++) {
+      const hamburgerObject = this.state.hamburger
+      let currentIngredient = this.state.selectedIngredients[i]
+      // console.log(this.state.selectedIngredients)
+      // console.log(this.state.selectedIngredients[0])
+      // console.log(this.state.selectedIngredients[i])
+      // console.log(currentIngredient in hamburgerObject)
+      // console.log("Lettuce" in hamburgerObject)
+      if (currentIngredient in hamburgerObject) {
+      // //   // let checkedIngredient = this.state.selectedIngredients[i]
+      // //   console.log(this.state.selectedIngredients[i])
+        console.log(currentIngredient)
+        // ingredientsToAdd.push(currentIngredient)
+        this.setState(prevState => ({
+          selectedIngredientsObject: { ...prevState.selectedIngredientsObject, currentIngredient:true }
+        }))
     }
-    console.log(this.state.hamburger.bun)
-    console.log(selectedIngredientsTally)
+      }
+      console.log(this.state.selectedIngredientsObject)
+      
+    return(this.state.selectedIngredients[0])
 
-    // for (let i = 0; i < this.state.hamburger.length; i++){
-    //   if (this.state.hamburger)
-    // }
-
-    //   if (this.state.hamburger.bun === selectedIngredientsTally.Bun){
-    //     message = "You have the right number of buns"
-    //     console.log ("i happen")
-    //   }
-    // return message
+    // console.log(this.state.selectedIngredients)
+    // console.log(this.state.hamburger)
+    // console.log(this.state.selectedIngredientsObject)
   }
 
-  orderKeys = (obj, expected) => {
-
-  var keys = Object.keys(obj).sort(function keyOrder(k1, k2) {
-      if (k1 < k2) return -1;
-      else if (k1 > k2) return +1;
-      else return 0;
-  });
-
-  var i, after = {};
-  for (i = 0; i < keys.length; i++) {
-    after[keys[i]] = obj[keys[i]];
-    delete obj[keys[i]];
-  }
-
-  for (i = 0; i < keys.length; i++) {
-    obj[keys[i]] = after[keys[i]];
-  }
-  return obj;
-  }
-
-    // let message = ""
-    // for (let ingredient of this.state.hamburger) 
-    // {
-    //   if (!this.state.selectedIngredients.includes(ingredient)) {
-    //    message = "You have a wrong ingredient"
-    //   }
-    //   if (this.state.selectedIngredients.includes(ingredient)) {
-        
-    //   }
-    //   if (score === this.state.hamburger.length) {
-    //   return "You built the correct burger"
-    // } else {
-    //   return "You built the wrong burger, try again!"
-    // }
-    
   // checkIngredients = () => {
-  //   let score = 1
-  //   for (let ingredient of this.state.hamburger) 
-  //   {
-  //     if (this.state.selectedIngredients.includes(ingredient)) {
-  //     score +=1
+  //   let selectedIngredientsTally = {};
+  //   // let message = ""
+  //   for (let i = 0; i < this.state.selectedIngredients.length; i++) {
+  //     if (this.state.selectedIngredients[i] in selectedIngredientsTally) {
+  //       selectedIngredientsTally[this.state.selectedIngredients[i]] += 1
+  //     } else {
+  //       selectedIngredientsTally[this.state.selectedIngredients[i]] = 1
   //     }
-  //   } 
-  //   if (score === this.state.hamburger.length) {
-  //     return "You built the correct burger"
-  //   } else {
-  //     return "You built the wrong burger, try again!"
   //   }
-  //   }
-  
+  //   console.log(this.state.hamburger.bun)
+  //   console.log(selectedIngredientsTally)
+  // }
+
+  // orderKeys = (obj, expected) => {
+
+  // var keys = Object.keys(obj).sort(function keyOrder(k1, k2) {
+  //     if (k1 < k2) return -1;
+  //     else if (k1 > k2) return +1;
+  //     else return 0;
+  // });
+
+  // var i, after = {};
+  // for (i = 0; i < keys.length; i++) {
+  //   after[keys[i]] = obj[keys[i]];
+  //   delete obj[keys[i]];
+  // }
+
+  // for (i = 0; i < keys.length; i++) {
+  //   obj[keys[i]] = after[keys[i]];
+  // }
+  // return obj;
+  // }
+ 
 
   handleClick = (event) => {
       let selectedIngredient2 = event.target.innerText
@@ -145,9 +137,9 @@ class IngredientForm extends React.Component {
     </tr>))}
   </tbody>
 </table>
-      
-      {this.checkIngredients()}
-      {/* {this.orderKeys(selectedIngredientsTally)} */}
+
+      {/* {this.checkIngredients2()} */}
+  <button onClick={this.checkIngredients2}>Check Ingredients</button> 
 
     </div>)};
 
