@@ -13,45 +13,70 @@ class IngredientForm extends React.Component {
       selectedIngredients: [],
       bun: false,
       // hamburger: ["Bun", "Lettuce", "Tomato"],
-      hamburger: {"Bun": 1, "Lettuce": 1, "Tomato": 1 },
+      hamburger: {Bun: 1, Lettuce: 1, Tomato: 1 },
       order: "hamburger",
       selectedIngredientsTally: {},
-      selectedIngredientsObject: {"Bun": false, "Lettuce": false, "Tomato": false},
+      // selectedIngredientsObject: {"Bun": false, "Lettuce": false, "Tomato": false},
     };
 
     // this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.checkIngredients2 = this.checkIngredients2.bind(this);
+    this.tallyIngredients = this.tallyIngredients.bind(this);
   }
 
-  checkIngredients2 = () => {
-    // let ingredientsToAdd = []
-    for (let i = 0; i < 3; i++) {
-      const hamburgerObject = this.state.hamburger
-      let currentIngredient = this.state.selectedIngredients[i]
-      if (currentIngredient in hamburgerObject) {
-        console.log(currentIngredient)
-        this.setState(prevState => ({
-          selectedIngredientsObject: { ...prevState.selectedIngredientsObject, currentIngredient:true }
-        }))
+  // checkIngredients2 = () => {
+  //   // let ingredientsToAdd = []
+  //   for (let i = 0; i < 3; i++) {
+  //     const hamburgerObject = this.state.hamburger
+  //     let currentIngredient = this.state.selectedIngredients[i]
+  //     if (currentIngredient in hamburgerObject) {
+  //       console.log(currentIngredient)
+  //       this.setState(prevState => ({
+  //         selectedIngredientsObject: { ...prevState.selectedIngredientsObject, currentIngredient:true }
+  //       }))
 
-    }
-      }
-    console.log(this.state)
+  //   }
+  //     }
+  //   console.log(this.state)
 
       
-    return(this.state.selectedIngredients[0])
-  } 
+  //   return(this.state.selectedIngredients[0])
+  // }
+
+  tallyIngredients = () => {
+    let selectedIngredientsTally = {};
+      console.log(this.state.selectedIngredients)
+    // let message = ""
+    for (let i = 0; i < this.state.selectedIngredients.length; i++) {
+      if (this.state.selectedIngredients[i] in selectedIngredientsTally) {
+        selectedIngredientsTally[this.state.selectedIngredients[i]] += 1
+      } else {
+        selectedIngredientsTally[this.state.selectedIngredients[i]] = 1
+      }
+    }
+    console.log(this.state.selectedIngredientsTally)
+    console.log(this.state.hamburger.Bun)
+    
+    // for (let i = 0; i < this.state.selectedIngredients.length; i++) {
+      if (this.state.selectedIngredientsTally.Bun === this.state.hamburger.Bun) {
+        console.log("Buns are right")
+      }
+      if (this.state.selectedIngredientsTally.Lettuce === this.state.hamburger.Lettuce) {
+        console.log("Lettuce are right")
+      }
+
+  }
 
   handleClick = (event) => {
       let selectedIngredient2 = event.target.innerText
       this.setState((state) => ({
          selectedIngredient: event.target.innerText,
         selectedIngredients: [...state.selectedIngredients, selectedIngredient2],
+      // event.target.innerText === "Bun" && bun: true,
       }));
-    }
-
-
+    console.log(this.state.selectedIngredients)
+  }
+  
   render() {
    
     return (<div>
@@ -74,7 +99,7 @@ class IngredientForm extends React.Component {
       <table>
         <tbody>
           <tr>
-      <th>Ingredient List Test</th>
+      <th>Ingredient List</th>
     </tr>
       {this.state.selectedIngredients.map((d, index) => (
     <tr key={index}>
@@ -83,7 +108,7 @@ class IngredientForm extends React.Component {
         </tbody>
       </table>
       
-      <button onClick={this.checkIngredients2}>Check Ingredients</button>
+      <button onClick={this.tallyIngredients}>Tally Ingredients</button>
 
     </div>)
   };
