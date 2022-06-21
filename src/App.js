@@ -4,6 +4,7 @@ import React from "react";
 import bunImage from './images/595-5957396_hamburger-bun-png-hamburger-bun-transparent-background-png.png';
 import tomatoImage from './images/png-clipart-sliced-tomato-pizza-tomato-vegetarian-cuisine-vegetable-tomato-food-nightshade-family.png';
 import lettuceImage from './images/kisspng-romaine-lettuce-hamburger-salad-clip-art-lettuce-5abb7a7895a819.786040171522236024613.jpg';
+import { GenerateOrders } from "./utils.js";
 
 class IngredientForm extends React.Component {
   constructor(props) {
@@ -11,11 +12,11 @@ class IngredientForm extends React.Component {
     this.state = {
       selectedIngredient: "",
       selectedIngredients: [],
-      bun: false,
-      hamburger2: ["Bun", "Lettuce", "Tomato"],
-      hamburger: {Bun: 1, Lettuce: 2, Tomato: 1 },
-      order: "hamburger",
-      selectedIngredientsTally: {},
+      // bun: false,
+      // hamburger2: ["Bun", "Lettuce", "Tomato"],
+      // hamburger: {Bun: 1, Lettuce: 2, Tomato: 1 },
+      order: GenerateOrders(),
+      // selectedIngredientsTally: {},
       // selectedIngredientsObject: {"Bun": false, "Lettuce": false, "Tomato": false},
     };
 
@@ -38,19 +39,20 @@ class IngredientForm extends React.Component {
 
     
     // for (let i = 0; i < this.state.selectedIngredients.length; i++) {
-      if (selectedIngredientsTally.Bun === this.state.hamburger.Bun) {
-        console.log("Buns are right")
-      }
-      if (selectedIngredientsTally.Lettuce === this.state.hamburger.Lettuce) {
-        console.log("Lettuce are right")
-      }
+      // if (selectedIngredientsTally.Bun === this.state.hamburger.Bun) {
+      //   console.log("Buns are right")
+      // }
+      // if (selectedIngredientsTally.Lettuce === this.state.hamburger.Lettuce) {
+      //   console.log("Lettuce are right")
+      // }
     
     let sortedSelectedIngredients = this.state.selectedIngredients.sort();
     console.log(sortedSelectedIngredients)
+    console.log(this.state.order)
     for (let i = 0; i < sortedSelectedIngredients.length; i++) {
-      if (!(sortedSelectedIngredients[i] === this.state.hamburger2[i])) {
+      if (!(sortedSelectedIngredients[i] === this.state.order[i])) {
         console.log("Something is missing")
-      } else if (sortedSelectedIngredients[i] === this.state.hamburger2[i]) {
+      } else if (sortedSelectedIngredients[i] === this.state.order[i]) {
         console.log("Looking good")
       }
     }
@@ -71,7 +73,7 @@ class IngredientForm extends React.Component {
 
  <header>
         <h1 className = "gameTitle">Burger Restaurant</h1>
-        <h3>Build me a {this.state.order}</h3>
+        <h3>Build me a {this.state.order}</h3>       
         <button onClick={this.handleClick}>Bun</button>
         {/* <button onClick={this.onClick= onClickHandler("ground")}>Bun</button> */}
         <button onClick={this.handleClick}>Tomato</button>
