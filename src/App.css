@@ -19,14 +19,30 @@
 }
 
 .Bun {
-  height: 100px;
-  width: 150px;
+  height: 15%;
+  width: 100px;
+  position: absolute;
+  z-index: 3;
 }
 .Tomato {
-  height: 100px;
-  width: 150px;
+  height: 15%;
+  width: 100px;
+  position: absolute;
+  z-index: 2;
 }
 .Lettuce {
-  height: 100px;
-  width: 150px;
+  height: 15%;
+  width: 100px;
+  position: absolute;
+  z-index: 1;
+}
+.Cheese {
+  height: 15%;
+  width: 100px;
+  position: absolute;
+  z-index: 1;
+}
+
+.burger {
+  height: 300px;
 }
