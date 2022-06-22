@@ -6,9 +6,20 @@ import Cheese from './images/Cheese.png'
 import "./App.css";
 
 class CheeseClass extends React.Component {
+  
+  // displayCheeseMethod = () => {
+  //   const selectedIngredients = this.props.selectedIngredients;
+  //   selectedIngredients.map(i => {
+  //       return (Cheese)
+  //   })
+  // }
+
   render() {
     return (
-      <img src={Cheese} alt="cheese" className="Cheese" />
+    <div>
+    <img src={Cheese} alt="cheese" className="Cheese" />
+        {/* {this.displayCheeseMethod} */}
+    </div>
     )
   }
 }
@@ -21,9 +32,12 @@ class Burger extends React.Component {
       <div className = "burger">
         <div> My burger</div>
 
-         {selectedIngredients.map(i => {
-           return <img src={i} alt={i} />;
-         })}
+        {selectedIngredients.map(i => {
+            return <CheeseClass />;
+        })}
+        {/* {selectedIngredients.map(i => {
+          return <img src={({i})} alt={i} />;
+         })} */}
 
 
         {/* {selectedIngredients.includes("Bun") === true && <img src={bunImage} alt="bun" className="Bun" />}
