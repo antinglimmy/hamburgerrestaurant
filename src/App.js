@@ -4,7 +4,7 @@ import React from "react";
 // import tomatoImage from './images/png-clipart-sliced-tomato-pizza-tomato-vegetarian-cuisine-vegetable-tomato-food-nightshade-family.png';
 // import lettuceImage from './images/kisspng-romaine-lettuce-hamburger-salad-clip-art-lettuce-5abb7a7895a819.786040171522236024613.jpg';
 import { GenerateOrders } from "./utils.js";
-import { Burger } from "./burger.js";
+import { Burger, CheeseClass } from "./burger.js";
 
 class IngredientForm extends React.Component {
   constructor(props) {
@@ -37,6 +37,14 @@ class IngredientForm extends React.Component {
         this.setState({ result: true });
       }
     }
+
+    for (let i = 0; i < this.state.selectedIngredients.length; i++) {
+      if (this.state.selectedIngredients[i] === "Bun") {
+        <CheeseClass />;
+      } else if (this.state.selectedIngredients[i] === "Lettuce") {
+        <CheeseClass />;
+      }
+    }
     console.log(this.state);
   };
 
@@ -46,7 +54,18 @@ class IngredientForm extends React.Component {
       selectedIngredient: event.target.innerText,
       selectedIngredients: [...state.selectedIngredients, selectedIngredient2],
     }));
+
     console.log(this.state);
+  };
+
+  bunClick = () => {
+    for (let i = 0; i < this.state.selectedIngredients.length; i++) {
+      if (this.state.selectedIngredients[i] === "Bun") {
+        <CheeseClass />;
+      } else if (this.state.selectedIngredients[i] === "Lettuce") {
+        <CheeseClass />;
+      }
+    }
   };
 
   render() {
@@ -55,9 +74,9 @@ class IngredientForm extends React.Component {
         <header>
           <h1 className="gameTitle">Burger Restaurant</h1>
           <h3>Build me a {this.state.order}</h3>
-          <button onClick={this.handleClick}>Bun</button>
+          <button onClick={this.bunClick}>Bun</button>
           <button onClick={this.handleClick}>Tomato</button>
-          <button onClick={this.handleClick}>Lettuce</button>
+          <button onClick={this.bunClick}>Lettuce</button>
           <button onClick={this.handleClick}>Cheese</button>
         </header>
 
